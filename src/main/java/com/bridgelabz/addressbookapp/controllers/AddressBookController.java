@@ -4,6 +4,7 @@ import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.dto.ResponseDTO;
 import com.bridgelabz.addressbookapp.entity.AddressBookData;
 import com.bridgelabz.addressbookapp.service.AddressBookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/addressbookservice")
+@Slf4j
 public class AddressBookController {
 
     @Autowired
@@ -28,13 +30,13 @@ public class AddressBookController {
     }
     @GetMapping("/get/{personId}")
     public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("personId")int personId){
-        AddressBookData addressBookData = null;
-        addressBookData = addressBookService.getAddressBookDataById(personId);
+        AddressBookData addressBookData = addressBookService.getAddressBookDataById(personId);
         ResponseDTO responseDTO = new ResponseDTO("Get Call For Id Successful!!", addressBookData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);    }
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressBookDTO){
+        log.debug("AddressBook DTO: " +addressBookDTO.toString());
         AddressBookData addressBookData = null;
         addressBookData = addressBookService.createAddressBookData(addressBookDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created Address Book Data Successfully: ", addressBookData);
@@ -42,8 +44,7 @@ public class AddressBookController {
 
     @PutMapping("/update/{personId}")
     public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("personId") int personId, @Valid@RequestBody AddressBookDTO addressBookDTO){
-        AddressBookData addressBookData = null;
-        addressBookData = addressBookService.updateAddressBookData(personId, addressBookDTO);
+        AddressBookData addressBookData = addressBookService.updateAddressBookData(personId, addressBookDTO);
         ResponseDTO responseDTO = new ResponseDTO("Updated Address Book Data Successfully:", addressBookData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);    }
 

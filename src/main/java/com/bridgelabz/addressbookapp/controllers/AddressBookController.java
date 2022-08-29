@@ -37,8 +37,7 @@ public class AddressBookController {
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressBookDTO){
         log.debug("AddressBook DTO: " +addressBookDTO.toString());
-        AddressBookData addressBookData = null;
-        addressBookData = addressBookService.createAddressBookData(addressBookDTO);
+        AddressBookData addressBookData = addressBookService.createAddressBookData(addressBookDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created Address Book Data Successfully: ", addressBookData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);    }
 

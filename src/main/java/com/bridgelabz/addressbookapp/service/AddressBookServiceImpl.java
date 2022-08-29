@@ -2,12 +2,19 @@ package com.bridgelabz.addressbookapp.service;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.entity.AddressBookData;
+import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
+@Slf4j
 public class AddressBookServiceImpl implements AddressBookService{
+    @Autowired
+    private AddressBookRepository addressBookRepository;
+
     private List<AddressBookData> addressBookDataList = new ArrayList<>();
     public List<AddressBookData> getAddressBookData(){
         return addressBookDataList;

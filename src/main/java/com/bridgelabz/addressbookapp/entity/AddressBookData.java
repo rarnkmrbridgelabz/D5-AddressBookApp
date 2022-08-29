@@ -3,16 +3,32 @@ package com.bridgelabz.addressbookapp.entity;
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="address_book")
 public @Data class AddressBookData {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "personId")
     private int personId;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "gender")
     private String gender;
+    @Column(name = "address")
     private String address;
+    @Column(name = "city")
     private String city;
+    @Column(name = "state")
     private String state;
+    @Column(name = "zip")
     private String zipCode;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "email_id")
     private String emailId;
 
 
